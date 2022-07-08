@@ -28,6 +28,7 @@ export default function ChartHeader() {
           tabBarStyle: { width: 0, height: 0 },
         }}
       />
+
       <TopTabNavigator.Screen
         name="chats"
         component={Charts}
