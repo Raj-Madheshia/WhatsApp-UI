@@ -1,7 +1,7 @@
 import { NavigationContainer, StackRouter } from "@react-navigation/native";
 
 import { createStackNavigator } from "@react-navigation/stack";
-import ChartHeader from "./src/chats/ChartHeader";
+import MainHeader from "./src/MainHeader";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import Chat3dot from "./src/chats/chartOptions/Chat3dot";
 import Status3dot from "./src/status/statusOptions/Status3dot";
@@ -48,7 +48,7 @@ export default function App() {
       >
         <StackNavigator.Screen
           name="chatheader"
-          component={ChartHeader}
+          component={MainHeader}
           options={({ navigation, route }) => ({
             headerShown:
               getFocusedRouteNameFromRoute(route) == "camera" ? false : true,

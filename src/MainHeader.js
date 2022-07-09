@@ -1,13 +1,13 @@
 import React from "react";
 import { Text, View } from "react-native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import Charts from "./Chats";
-import Calls from "../calls/Calls";
-import Camera from "../camera/Camera";
-import Status from "../status/Status";
+import Charts from "./chats/Chats";
+import Calls from "./calls/Calls";
+import Camera from "./camera/Camera";
+import Status from "./status/Status";
 import { Entypo } from "@expo/vector-icons";
 
-export default function ChartHeader() {
+export default function MainHeader() {
   const TopTabNavigator = createMaterialTopTabNavigator();
   return (
     <TopTabNavigator.Navigator
