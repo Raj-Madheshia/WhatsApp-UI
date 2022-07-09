@@ -188,7 +188,6 @@ export default function Camera({ navigation, route, active }) {
           <View
             style={{
               flex: 1,
-              backgroundColor: "transparent",
               flexDirection: "row",
               flexWrap: "nowrap",
               justifyContent: "space-around",
@@ -196,26 +195,50 @@ export default function Camera({ navigation, route, active }) {
               paddingBottom: 20,
             }}
           >
-            <MaterialCommunityIcons
-              name="flash"
-              size={30}
-              color="white"
-              onPress={() =>
-                setFlashOn((oldState) =>
-                  oldState == "off" ? FlashMode.on : FlashMode.off
-                )
-              }
+            <TouchableOpacity
+              activeOpacity={0.3}
+              extraButtonProps={{ rippleColor: "#2bb093" }}
               style={{
-                color: flashOn == "off" ? "white" : "yellow",
+                width: 70,
+                height: 70,
+                borderRadius: 35,
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "transparent",
               }}
-            />
+            >
+              <MaterialCommunityIcons
+                name="flash"
+                size={30}
+                color="white"
+                onPress={() =>
+                  setFlashOn((oldState) =>
+                    oldState == "off" ? FlashMode.on : FlashMode.off
+                  )
+                }
+                style={{
+                  color: flashOn == "off" ? "white" : "yellow",
+                }}
+              />
+            </TouchableOpacity>
             <Feather
               name="circle"
               size={70}
               color="white"
               onPress={_takePhoto}
             />
-            <TouchableHighlight underlayColor="#00FF00" activeOpacity={0.4}>
+            <TouchableOpacity
+              activeOpacity={0.3}
+              extraButtonProps={{ rippleColor: "#2bb093" }}
+              style={{
+                width: 70,
+                height: 70,
+                borderRadius: 35,
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "transparent",
+              }}
+            >
               <MaterialCommunityIcons
                 name="camera-flip"
                 size={30}
@@ -228,7 +251,7 @@ export default function Camera({ navigation, route, active }) {
                   );
                 }}
               />
-            </TouchableHighlight>
+            </TouchableOpacity>
           </View>
         </Cam>
       )}

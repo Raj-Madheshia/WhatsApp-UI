@@ -13,16 +13,19 @@ export default function MainHeader() {
     <TopTabNavigator.Navigator
       initialRouteName="chats"
       screenOptions={{
-        tabBarLabelStyle: { fontSize: 14, color: "#25D366" },
+        tabBarLabelStyle: { fontSize: 14 }, //color: "#2bb093"
         tabBarItemStyle: { width: 100 },
-        tabBarStyle: { backgroundColor: "#075E54" },
+        tabBarStyle: { backgroundColor: "#202A33", color: "#FFFFFF" },
+        tabBarActiveTintColor: "#2bb093",
+        tabBarInactiveTintColor: "#FFFFFF",
+        tabBarIndicatorStyle: { backgroundColor: "#2bb093" },
       }}
     >
       <TopTabNavigator.Screen
         name="camera"
         component={Camera}
         options={{
-          tabBarIcon: () => <Entypo name="camera" size={24} color="#25D366" />,
+          tabBarIcon: () => <Entypo name="camera" size={24} color="white" />,
           tabBarShowIcon: true,
           tabBarShowLabel: false,
           tabBarStyle: { width: 0, height: 0 },

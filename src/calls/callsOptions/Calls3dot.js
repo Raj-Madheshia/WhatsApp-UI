@@ -16,7 +16,7 @@ function Calls3dot() {
           <MaterialCommunityIcons
             name="dots-vertical"
             size={24}
-            color="white"
+            color="#ADB7C0"
             onPress={showMenu}
           />
         }

@@ -40,7 +40,7 @@ export default function App() {
         screenOptions={{
           headerTintColor: "#ddd",
           headerStyle: {
-            backgroundColor: "#075E54",
+            backgroundColor: "#202A33",
             elevation: 0,
             shadowOpacity: 0,
           },
@@ -54,10 +54,15 @@ export default function App() {
               getFocusedRouteNameFromRoute(route) == "camera" ? false : true,
             headerRight: (props) => getMenu(route),
             headerTitle: "WhatsApp",
-            backgroundColor: "#075E54",
+            headerTintColor: "#ADB7C0",
+            backgroundColor: "#202A33",
           })}
         />
       </StackNavigator.Navigator>
     </NavigationContainer>
   );
 }
+
+// #ADB7C0 // pale white
+// #2bb093  green
+// #202A33 // Dark Green Background
