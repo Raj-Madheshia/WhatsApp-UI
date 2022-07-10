@@ -9,6 +9,9 @@ import {
   View,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { ChatData } from "../assets/dummy/dummyChat";
+
+// Image, name, lastMsgTime, lastMsg
 
 export default function Charts({ navigation }) {
   const count = 20;
@@ -18,7 +21,7 @@ export default function Charts({ navigation }) {
       contentContainerStyle={{ shadowColor: "#FFFFFF" }}
       indicatorStyle="white"
     >
-      {[...Array(count)].map((e, i) => (
+      {ChatData.map((d, i) => (
         <TouchableOpacity
           key={i}
           extraButtonProps={{ rippleColor: "#ADB7C0" }}
@@ -26,23 +29,20 @@ export default function Charts({ navigation }) {
         >
           <View style={styles.eachChat}>
             <View style={styles.logoView}>
-              <Image
-                style={styles.tinyLogo}
-                source={require("../assets/Image/yooda.jpg")}
-              />
+              <Image style={styles.tinyLogo} source={d["image"]} />
             </View>
             <View style={styles.chatDetails}>
               <View style={styles.top_bottom}>
                 <View style={styles.name}>
-                  <Text style={styles.nameText}>Shreyas</Text>
+                  <Text style={styles.nameText}>{d["name"]}</Text>
                 </View>
                 <View style={styles.time}>
-                  <Text style={styles.timeText}>Yesterday</Text>
+                  <Text style={styles.timeText}>{d["lastMsgTime"]}</Text>
                 </View>
               </View>
               <View style={styles.top_bottom}>
                 <View style={styles.chat}>
-                  <Text style={styles.chatText}>Great Thanks...</Text>
+                  <Text style={styles.chatText}>{d["lastMsg"]}</Text>
                 </View>
               </View>
             </View>
