@@ -3,12 +3,16 @@ import { View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Menu, MenuItem, MenuDivider } from "react-native-material-menu";
 
-function Chat3dot() {
+function Chat3dot({ navigation }) {
   const [visible, setVisible] = useState(false);
-
   const hideMenu = () => setVisible(false);
-
   const showMenu = () => setVisible(true);
+
+  function openScreen(screenValue) {
+    hideMenu();
+    navigation.navigate("newGroup");
+  }
+
   return (
     <View style={{ paddingRight: 10 }}>
       <Menu
@@ -23,7 +27,7 @@ function Chat3dot() {
         }
         onRequestClose={hideMenu}
       >
-        <MenuItem onPress={hideMenu}>New Group</MenuItem>
+        <MenuItem onPress={() => openScreen("newGroup")}>New Group</MenuItem>
         <MenuItem onPress={hideMenu}>New broadcast</MenuItem>
         <MenuItem onPress={hideMenu}>Linked devices</MenuItem>
         <MenuItem onPress={hideMenu}>Starred messages</MenuItem>

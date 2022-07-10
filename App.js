@@ -7,29 +7,23 @@ import Chat3dot from "./src/chats/chartOptions/Chat3dot";
 import Status3dot from "./src/status/statusOptions/Status3dot";
 import { useState } from "react";
 import Calls3dot from "./src/calls/callsOptions/Calls3dot";
+import NewGroup from "./src/menuOption/NewGroup";
+import NewGroupHeaderTitle from "./src/menuOption/NewGroupHeaderTitle";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function App() {
   const StackNavigator = createStackNavigator();
   const [visibile, setVisible] = useState(true);
 
-  function getMenu(route) {
+  function getMenu(navigation, route) {
     const routeName = getFocusedRouteNameFromRoute(route) ?? "chats";
     switch (routeName) {
       case "chats":
-        return <Chat3dot />;
+        return <Chat3dot navigation={navigation} route={route} />;
       case "status":
-        return <Status3dot />;
+        return <Status3dot navigation={navigation} route={route} />;
       case "calls":
-        return <Calls3dot />;
-    }
-  }
-  function headVisible(route) {
-    const routeName = getFocusedRouteNameFromRoute(route) ?? "chats";
-    console.log(routeName);
-    switch (routeName) {
-      case "camera":
-        console.log("yes");
-        return false;
+        return <Calls3dot navigation={navigation} route={route} />;
     }
   }
 
@@ -52,11 +46,26 @@ export default function App() {
           options={({ navigation, route }) => ({
             headerShown:
               getFocusedRouteNameFromRoute(route) == "camera" ? false : true,
-            headerRight: (props) => getMenu(route),
+            headerRight: (props) => getMenu(navigation, route),
             headerTitle: "WhatsApp",
             headerTintColor: "#ADB7C0",
             backgroundColor: "#202A33",
           })}
+        />
+        <StackNavigator.Screen
+          name="newGroup"
+          component={NewGroup}
+          options={{
+            headerTitle: (props) => <NewGroupHeaderTitle />,
+            headerRight: (props) => (
+              <Ionicons
+                name="search"
+                size={24}
+                color="white"
+                style={{ paddingRight: 20 }}
+              />
+            ),
+          }}
         />
       </StackNavigator.Navigator>
     </NavigationContainer>

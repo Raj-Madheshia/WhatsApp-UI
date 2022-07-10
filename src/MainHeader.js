@@ -32,11 +32,7 @@ export default function MainHeader() {
         }}
       />
 
-      <TopTabNavigator.Screen
-        name="chats"
-        component={Charts}
-        options={({ navigation, route }) => ({})}
-      />
+      <TopTabNavigator.Screen name="chats" component={Charts} />
       <TopTabNavigator.Screen name="status" component={Status} options={{}} />
       <TopTabNavigator.Screen name="calls" component={Calls} options={{}} />
     </TopTabNavigator.Navigator>
