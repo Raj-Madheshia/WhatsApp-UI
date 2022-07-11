@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Button,
   Image,
+  Modal,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -15,41 +17,72 @@ import { ChatData } from "../assets/dummy/dummyChat";
 
 export default function Charts({ navigation }) {
   const count = 20;
+  const [modalVisible, setModalVisible] = useState(false);
+  const [currentImage, setCurrentImage] = useState("");
   return (
-    <ScrollView
-      style={styles.main}
-      contentContainerStyle={{ shadowColor: "#FFFFFF" }}
-      indicatorStyle="white"
-    >
-      {ChatData.map((d, i) => (
-        <TouchableOpacity
-          key={i}
-          extraButtonProps={{ rippleColor: "#ADB7C0" }}
-          activeOpacity={0.2}
-        >
-          <View style={styles.eachChat}>
-            <View style={styles.logoView}>
-              <Image style={styles.tinyLogo} source={d["image"]} />
-            </View>
-            <View style={styles.chatDetails}>
-              <View style={styles.top_bottom}>
-                <View style={styles.name}>
-                  <Text style={styles.nameText}>{d["name"]}</Text>
-                </View>
-                <View style={styles.time}>
-                  <Text style={styles.timeText}>{d["lastMsgTime"]}</Text>
-                </View>
+    <View>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          Alert.alert("Modal has been closed.");
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Image style={styles.openDp} source={currentImage} />
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>Hide Profile</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <ScrollView
+        style={styles.main}
+        contentContainerStyle={{ shadowColor: "#FFFFFF" }}
+        indicatorStyle="white"
+      >
+        {ChatData.map((d, i) => (
+          <View key={i}>
+            <View style={styles.eachChat}>
+              <View style={styles.logoView}>
+                <TouchableOpacity
+                  extraButtonProps={{ rippleColor: "#ADB7C0" }}
+                  activeOpacity={0.2}
+                  onPress={() => {
+                    setModalVisible(true);
+                    console.log("yes");
+                    setCurrentImage(d["image"]);
+                  }}
+                >
+                  <Image style={styles.tinyLogo} source={d["image"]} />
+                </TouchableOpacity>
               </View>
-              <View style={styles.top_bottom}>
-                <View style={styles.chat}>
-                  <Text style={styles.chatText}>{d["lastMsg"]}</Text>
+              <View style={styles.chatDetails}>
+                <View style={styles.top_bottom}>
+                  <View style={styles.name}>
+                    <Text style={styles.nameText}>{d["name"]}</Text>
+                  </View>
+                  <View style={styles.time}>
+                    <Text style={styles.timeText}>{d["lastMsgTime"]}</Text>
+                  </View>
+                </View>
+                <View style={styles.top_bottom}>
+                  <View style={styles.chat}>
+                    <Text style={styles.chatText}>{d["lastMsg"]}</Text>
+                  </View>
                 </View>
               </View>
             </View>
           </View>
-        </TouchableOpacity>
-      ))}
-    </ScrollView>
+        ))}
+      </ScrollView>
+    </View>
   );
 }
 
@@ -113,5 +146,51 @@ const styles = StyleSheet.create({
   chatText: {
     color: "#ADB7C0",
     fontSize: 14,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  buttonOpen: {
+    backgroundColor: "#F194FF",
+  },
+  buttonClose: {
+    backgroundColor: "#2196F3",
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
+  },
+  openDp: {
+    width: 300,
+    height: 300,
+    borderRadius: 30,
   },
 });
