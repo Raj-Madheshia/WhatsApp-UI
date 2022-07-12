@@ -4,6 +4,7 @@ import {
   Image,
   Modal,
   Pressable,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -12,36 +13,31 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { ChatData } from "../assets/dummy/dummyChat";
+import ProfileModal from "./components/ProfileModal";
 
 // Image, name, lastMsgTime, lastMsg
 
-export default function Charts({ navigation }) {
+export default function Charts({ navigation, route }) {
   const count = 20;
   const [modalVisible, setModalVisible] = useState(false);
-  const [currentImage, setCurrentImage] = useState("");
+  const [currentImage, setCurrentImage] = useState(
+    require("../assets/Image/jerry-min.png")
+  );
+  const ImagesList = {
+    1: require("../assets/Image/tom-min.png"),
+    2: require("../assets/Image/nobita-min.jpg"),
+    3: require("../assets/Image/yooda-min.jpg"),
+    4: require("../assets/Image/doremon-min.png"),
+  };
   return (
-    <View>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Image style={styles.openDp} source={currentImage} />
-            <Pressable
-              style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}
-            >
-              <Text style={styles.textStyle}>Hide Profile</Text>
-            </Pressable>
-          </View>
-        </View>
-      </Modal>
+    <View style={{ width: "100%", height: "100%" }}>
+      <ProfileModal
+        navigation={navigation}
+        route={route}
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        currentImage={currentImage}
+      />
       <ScrollView
         style={styles.main}
         contentContainerStyle={{ shadowColor: "#FFFFFF" }}
@@ -63,7 +59,16 @@ export default function Charts({ navigation }) {
                   <Image style={styles.tinyLogo} source={d["image"]} />
                 </TouchableOpacity>
               </View>
-              <View style={styles.chatDetails}>
+              <Pressable
+                style={styles.chatDetails}
+                onPress={() =>
+                  navigation.navigate("openChat", {
+                    name: d["name"],
+                    image: d["image"],
+                    lastSeen: d["lastSeen"],
+                  })
+                }
+              >
                 <View style={styles.top_bottom}>
                   <View style={styles.name}>
                     <Text style={styles.nameText}>{d["name"]}</Text>
@@ -77,11 +82,24 @@ export default function Charts({ navigation }) {
                     <Text style={styles.chatText}>{d["lastMsg"]}</Text>
                   </View>
                 </View>
-              </View>
+              </Pressable>
             </View>
           </View>
         ))}
       </ScrollView>
+      {/* New */}
+      {/* <SafeAreaView style={{ width: "100%", height: "100%" }}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          <View style={styles.eachChat}>
+            <View style={styles.logoView}>
+              <Image
+                style={styles.tinyLogo}
+                source={require("../assets/Image/tom-min.png")}
+              />
+            </View>
+          </View>
+        </ScrollView>
+      </SafeAreaView> */}
     </View>
   );
 }
@@ -93,6 +111,8 @@ const styles = StyleSheet.create({
     elevation: 0,
     shadowOpacity: 0,
     backgroundColor: "#111C22",
+    width: "100%",
+    height: "100%",
   },
   eachChat: {
     height: 70,
@@ -146,51 +166,5 @@ const styles = StyleSheet.create({
   chatText: {
     color: "#ADB7C0",
     fontSize: 14,
-  },
-  centeredView: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    backgroundColor: "white",
-    borderRadius: 20,
-    padding: 35,
-    alignItems: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: "#F194FF",
-  },
-  buttonClose: {
-    backgroundColor: "#2196F3",
-  },
-  textStyle: {
-    color: "white",
-    fontWeight: "bold",
-    textAlign: "center",
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: "center",
-  },
-  openDp: {
-    width: 300,
-    height: 300,
-    borderRadius: 30,
   },
 });

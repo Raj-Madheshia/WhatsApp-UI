@@ -30,6 +30,8 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "Static WhatsApp UI",
+    "githubUrl": "https://github.com/Raj-Madheshia/WhatsApp-UI"
   }
 }

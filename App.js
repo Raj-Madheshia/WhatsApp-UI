@@ -10,6 +10,7 @@ import Calls3dot from "./src/calls/callsOptions/Calls3dot";
 import NewGroup from "./src/menuOption/NewGroup";
 import NewGroupHeaderTitle from "./src/menuOption/NewGroupHeaderTitle";
 import { Ionicons } from "@expo/vector-icons";
+import OpenChat from "./src/chats/components/OpenChat";
 
 export default function App() {
   const StackNavigator = createStackNavigator();
@@ -67,6 +68,7 @@ export default function App() {
             ),
           }}
         />
+        <StackNavigator.Screen name="openChat" component={OpenChat} />
       </StackNavigator.Navigator>
     </NavigationContainer>
   );
